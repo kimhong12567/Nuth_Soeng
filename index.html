@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Invitation - Sreynuth & Kimsoeung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&family=Birthstone&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Moul&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+      
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&family=Hanuman:wght@400;700&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f9f7f5;
+        color: #333;
+        font-family: "Montserrat", sans-serif;
+        line-height: 1.6;
+      }
+
+      .invitation-container {
+        max-width: 600px;
+        margin: 10px auto;
+        background: rgb(255, 255, 255);
+        box-shadow: 0 10px 30px rgba(184, 32, 32, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header-image {
+        width: 100%;
+        height: 350px;
+        background-image: url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+
+      .couple-photo {
+        width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        margin: 8px 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: none;
+      }
+
+      .couple-photo.active {
+        display: block;
+      }
+
+      .photo-gallery {
+        position: relative;
+      }
+
+      .gallery-nav {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+      }
+
+      .gallery-nav button {
+        background: #c19a6b;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        margin: 0 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-nav button:hover {
+        background: #b78a56;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      .couple-names {
+        position: absolute;
+        bottom: 100px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: white;
+        z-index: 2;
+      }
+
+      .couple-names h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+
+      .couple-names h2 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.2rem;
+        margin: 10px 0 0;
+        font-weight: 300;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+      }
+
+      .divider {
+        width: 80px;
+        height: 2px;
+        background: white;
+        margin: 15px auto;
+      }
+
+      .invitation-content {
+        padding: 40px;
+        text-align: center;
+      }
+
+      .guest-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        color: #c19a6b;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+      }
+
+      .invitation-text {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        color: #555;
+      }
+
+      .khmer-text {
+        font-family: "Hanuman", serif;
+        font-size: 1.2rem;
+        color: #444;
+        line-height: 1.8;
+        margin-bottom: 25px;
+      }
+
+      .date-time {
+        font-family: "Hanuman", serif;
+        margin: 30px 0;
+      }
+
+      .date,
+      .time,
+      .location {
+        margin: 15px 0;
+        font-size: 1.2rem;
+      }
+
+      .date span,
+      .time span,
+      .location span {
+        display: block;
+        font-size: 1.2rem;
+        color: #222;
+        margin-bottom: 5px;
+      }
+
+      .map-button {
+        display: inline-block;
+        padding: 12px 25px;
+        background: #c19a6b;
+        color: white;
+        text-decoration: none;
+        font-family: "Montserrat", sans-serif;
+        border-radius: 4px;
+        margin: 20px 0;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .map-button:hover {
+        background: #b78a56;
+      }
+
+      .footer {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #999;
+        margin-top: 20px;
+      }
+
+      .khmer-date {
+        font-family: "Hanuman", serif;
+        font-size: 0.9rem;
+        color: #777;
+        margin-top: 5px;
+      }
+
+      .location-address {
+        margin-top: 10px;
+        font-style: italic;
+        color: #666;
+      }
+      .battambang-thin {
+        font-family: "Battambang", system-ui;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 1.4rem;
+      }
+
+      .countdown {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        font-family: "Playfair Display", serif;
+      }
+
+      .countdown-item {
+        margin: 0 10px;
+        text-align: center;
+      }
+
+      .countdown-number {
+        font-size: 1.8rem;
+        color: #c19a6b;
+        font-weight: bold;
+      }
+
+      .countdown-label {
+        font-size: 0.8rem;
+        color: #666;
+        text-transform: uppercase;
+      }
+
+      .rsvp-section {
+        margin: 30px 0;
+        font-size: 0.7rem;
+        color: #666;
+        
+      }
+
+      .rsvp-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 4px;
+      }
+
+      .rsvp-button {
+        padding: 7px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Montserrat", sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .rsvp-button:hover {
+        opacity: 0.8;
+      }
+
+      .confirmation-message {
+        margin-top: 15px;
+        font-family: "Hanuman", serif;
+        color: #4CAF50;
+        display: none;
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanuman:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="Wedding Hor sreynuth with Laeng Kimsoeng" />
+    <meta property="og:description"        content="How much does culture influence creative thinking?" />
+    <meta property="og:image"              content="https://miro.medium.com/v2/resize:fit:1200/1*uNCVd_VqFOcdxhsL71cT5Q.jpeg" />
+
+  </head>
+  <body>
+    <div class="invitation-container">
+      <div class="header-image">
+        <div class="overlay"></div>
+        <div class="couple-names">
+          <h1>Sreynuth 
+             <br> & 
+            <br> Kimsoeung</h1>
+          <div class="divider"></div>
+          <h2>Are Getting Married</h2>
+        </div>
+      </div>
+
+      <div class="invitation-content">
+        <!-- Countdown Timer -->
+        <!-- <div class="countdown">
+          <div class="countdown-item">
+            <div class="countdown-number" id="days">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="hours">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="minutes">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="seconds">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div> -->
+
+        <div class="guest-name" id="guestName">To: [Guest's Name]</div>
+
+        <div class="battambang-thin">មានកិត្តិយសសូមគោរពអញ្ជើញ</div>
+        <p class="khmer-text">
+          លោក លោកស្រី អ្នកនាង កញ្ញា អញ្ជើញចូលរួមជាអធិបតីនិង ជាភ្ញៀវកិត្តិយស
+          ដើម្បីប្រសិទ្ធពរជ័យ សិរីសួស្ដី ជ័យមង្គល ក្នុងពិធីអាពាហ៍ពិពាហ៍
+          កូនប្រុស-កូនស្រី របស់យើងខ្ញុំ។
+        </p>
+
+        <div class="date-time">
+          <div class="date">
+            <span>ថ្ងៃសៅរ៍ ទី២៥ ខែតុលា ឆ្នាំ២០២៥</span>
+            <div class="khmer-date">Saturday, October 25th, 2025</div>
+          </div>
+
+          <div class="time">
+            <span>៤រសៀល</span>
+            <div class="khmer-date">4:00 PM ម៉ោង</div>
+          </div>
+
+          <div class="location">
+            <span>ភូមិផ្អាវ ឃុំផ្អាវ ស្រុកបាធាយ ខេត្តកំពង់ចាម</span>
+            <div class="khmer-date">
+              Ph'av village, Ph'av commune, Batheay district, Kampong Cham
+              province
+            </div>
+            <br />
+            <div class="battambang-thin">
+              សេចក្តីថ្លែងអំណរគុណ​ នឹងសូមអភ័យទោស
+            </div>
+            <div class="khmer-date">
+              យើងខ្ញុំសូមថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅចំពោះការអញ្ជើញចូលរួមជាភ្ញៀវកិត្តិយសក្នុងពិធីរបស់យើងខ្ញុំ។
+              សូមអភ័យទោសដោយពុំបានជួបអញ្ជើញដោយផ្ទាល់
+              និងការសរសេរឈ្មោះរបស់ភ្ញៀវកិត្តិយសមិនបានត្រឹមត្រូវ
+              ឬពុំបានសរសេរឈ្មោះ។ សូមជូនពរ ឯកឧត្តម អ្នកឧកញ៉ា ឧកញ៉ា លោកជំទាវ
+              និងភ្ញៀវកិត្តិយសទាំងអស់មានសុខភាពល្អ
+              និងទទួលបានភាពជោគជ័យគ្រប់ភារកិច្ច។ សូមអរគុណ!
+            </div>
+
+            <a
+              href="https://maps.app.goo.gl/pyxYWaqQ3jGGXctq5"
+              target="_blank"
+              class="map-button"
+            >
+              View Location on Map
+            </a>
+          </div>
+        </div>
+
+        <!-- RSVP Section -->
+        <div class="rsvp-section">
+          <!-- <h3>តើលោកអ្នកនឹងអញ្ជើញចូលរួមកម្មវិធីដែរឬទេ?</h3>
+          <div class="rsvp-buttons">
+            <button class="rsvp-button rsvp-yes" onclick="rsvp(true)">ចូលរួម</button>
+            <button class="rsvp-button rsvp-no" onclick="rsvp(false)">មិនបានចូលរួម</button>
+          </div> -->
+          <div class="confirmation-message" id="confirmationMessage">
+            Thank you for your response! We look forward to celebrating with you.
+          </div>
+        </div>
+
+        
+        <!-- Countdown Timer -->
+        <div class="countdown">
+          <div class="countdown-item">
+            <div class="countdown-number" id="days">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="hours">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="minutes">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="seconds">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+
+        <!-- Photo Gallery -->
+         <div class="photo-gallery">
+          <img
+            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple romantic photo"
+            class="couple-photo active"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple at beach"
+            class="couple-photo"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple holding hands"
+            class="couple-photo"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple sunset"
+            class="couple-photo"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple formal"
+            class="couple-photo"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple laughing"
+            class="couple-photo"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1517840535241-491a786aabc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple walking"
+            class="couple-photo"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1518622358385-8ea7d0794bf6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple in nature"
+            class="couple-photo"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple formal portrait"
+            class="couple-photo"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            alt="Couple closeup"
+            class="couple-photo"
+          />
+
+          <div class="gallery-nav">
+            <button onclick="changePhoto(-1)">Previous</button>
+            <button onclick="changePhoto(1)">Next</button>
+          </div>
+          <div class="photo-counter" id="photoCounter">1 of 10</div>
+        </div>
+
+        <div class="footer">
+          Dinner and celebration to follow<br />
+          <span class="khmer-date">មានអាហារពេលល្ងាច</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Get guest name from URL parameters
+      document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('name');
+        
+        if (guestName) {
+          document.getElementById('guestName').textContent = `To: ${decodeURIComponent(guestName)}`;
+        }
+
+        // Set up countdown timer
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Initialize photo gallery
+        initGallery();
+      });
+
+      // Countdown timer function
+      function updateCountdown() {
+        const weddingDate = new Date('October 25, 2025 16:00:00').getTime();
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+          document.getElementById('days').textContent = '00';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      }
+
+      // Photo gallery functions
+       let currentPhotoIndex = 0;
+      const photos = document.querySelectorAll('.couple-photo');
+
+      function initGallery() {
+        if (photos.length > 0) {
+          photos[0].classList.add('active');
+          updatePhotoCounter();
+        }
+      }
+
+      function changePhoto(direction) {
+        photos[currentPhotoIndex].classList.remove('active');
+        
+        currentPhotoIndex += direction;
+        
+        if (currentPhotoIndex >= photos.length) {
+          currentPhotoIndex = 0;
+        } else if (currentPhotoIndex < 0) {
+          currentPhotoIndex = photos.length - 1;
+        }
+        
+        photos[currentPhotoIndex].classList.add('active');
+        updatePhotoCounter();
+      }
+
+      function updatePhotoCounter() {
+        document.getElementById('photoCounter').textContent = 
+          `${currentPhotoIndex + 1} of ${photos.length}`;
+      }
+
+      // RSVP function
+      function rsvp(attending) {
+        const message = document.getElementById('confirmationMessage');
+        
+       
+        
+        message.style.display = 'block';
+        
+        // In a real application, you would send this data to a server
+        console.log(`Guest RSVP: ${attending ? 'Attending' : 'Not attending'}`);
+        
+        // Hide the buttons after response
+        document.querySelectorAll('.rsvp-button').forEach(button => {
+          button.style.display = 'none';
+        });
+      }
+    </script>
+  </body>
+</html>
